@@ -1,6 +1,6 @@
 import random
 import os
-import torch.backends.cudnn as cudnn
+
 import torch.optim as optim
 import torch.utils.data
 from torch.autograd import Variable
@@ -11,7 +11,7 @@ from code.model import GANModel
 
 model_root = os.path.join('..', 'models')
 cuda = True
-cudnn.benchmark = True
+
 lr = 1e-3
 batch_size = 128
 n_epoch = 100
