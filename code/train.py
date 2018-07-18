@@ -40,7 +40,7 @@ source_test_label = np.load(source_label_test)
 target_train_data = np.load(target_data_train)
 target_test_data = np.load(target_data_test)
 target_test_label = np.load(target_label_test)
-source_dataset = torch.utils.data.TensorDataset(torch.Tensor(source_train_data),torch.Tensor(source_train_label))
+source_dataset = torch.utils.data.TensorDataset(torch.Tensor(source_train_data),torch.LongTensor(source_train_label))
 
 dataloader_source = torch.utils.data.DataLoader(
     dataset=source_dataset,
