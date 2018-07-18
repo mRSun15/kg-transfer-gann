@@ -135,11 +135,11 @@ for epoch in range(n_epoch):
         domain_label = domain_label.long()
 
         if cuda:
-            t_img = t_img.cuda()
+            t_data = t_data.cuda()
             input_img = input_img.cuda()
             domain_label = domain_label.cuda()
 
-        input_img.resize_as_(t_img).copy_(t_img)
+        input_img.resize_as_(t_data).copy_(t_data)
         inputv_img = Variable(input_img)
         domainv_label = Variable(domain_label)
 
