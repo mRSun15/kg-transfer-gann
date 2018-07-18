@@ -5,9 +5,9 @@ import torch.optim as optim
 import torch.utils.data
 from torch.autograd import Variable
 import numpy as np
-from code.test import test
+from test import test
 import sys
-from code.model import GANModel
+from model import GANModel
 
 model_root = os.path.join('..', 'models')
 cuda = True

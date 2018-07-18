@@ -1,6 +1,6 @@
 import torch.nn as nn
 
-from code.functions import ReverseLayerF
+from functions import ReverseLayerF
 
 
 class GANModel(nn.Module):
