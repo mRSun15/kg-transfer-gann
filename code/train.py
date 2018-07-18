@@ -6,7 +6,7 @@ import torch.utils.data
 from torch.autograd import Variable
 import numpy as np
 from code.test import test
-
+import sys
 from code.model import GANModel
 
 model_root = os.path.join('..', 'models')
@@ -77,7 +77,9 @@ for p in my_net.parameters():
     p.requires_grad = True
 
 # training
-
+f = open('../output.txt', 'w')
+old = sys.stdout
+sys.stdout = f
 for epoch in range(n_epoch):
 
     len_dataloader = min(len(dataloader_source), len(dataloader_target))
@@ -154,4 +156,6 @@ for epoch in range(n_epoch):
     test('source_data_wiki', source_test_data,source_test_label, epoch)
     test('test_data_nyt', target_test_data,target_test_label,epoch)
 
+sys.stdout = old
+f.close()
 print('done')
