@@ -31,6 +31,7 @@ target_label_test = os.path.join(target_data_root, 'nyt_test_label.npy')
 # load data
 
 #source data: wiki_data, target_data:nyt
+print("load data")
 
 source_train_data = np.load(source_data_train)
 source_train_label = np.load(source_label_train)
@@ -50,8 +51,8 @@ dataloader_target = torch.utils.data.DataLoader(
     batch_size=batch_size,
     shuffle=True,
     num_workers=8)
-
 # load model
+print("load model")
 max_length = 100
 input_dim = 55
 embedding_dim = 100
@@ -75,7 +76,7 @@ if cuda:
 
 for p in my_net.parameters():
     p.requires_grad = True
-
+print("train")
 # training
 f = open('../output.txt', 'w')
 old = sys.stdout
