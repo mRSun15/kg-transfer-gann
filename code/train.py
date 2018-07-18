@@ -41,6 +41,7 @@ target_train_data = np.load(target_data_train)
 target_test_data = np.load(target_data_test)
 target_test_label = np.load(target_label_test)
 source_dataset = torch.utils.data.TensorDataset(torch.Tensor(source_train_data),torch.Tensor(source_train_label))
+
 dataloader_source = torch.utils.data.DataLoader(
     dataset=source_dataset,
     batch_size=batch_size,
@@ -107,13 +108,13 @@ for epoch in range(n_epoch):
         domain_label = domain_label.long()
 
         if cuda:
-            s_img = s_img.cuda()
+            s_data = s_data.cuda()
             s_label = s_label.cuda()
             input_img = input_data.cuda()
             class_label = class_label.cuda()
             domain_label = domain_label.cuda()
 
-        input_data.resize_as_(s_img).copy_(s_img)
+        input_data.resize_as_(s_data).copy_(s_data)
         class_label.resize_as_(s_label).copy_(s_label)
         inputv_img = Variable(input_data)
         classv_label = Variable(class_label)

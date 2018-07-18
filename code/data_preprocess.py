@@ -30,6 +30,7 @@ def GetEntityPos(entity1, entity2, sentence):
     pos_second = pos_1 + pos_2 - pos_first
     return [pos_first, pos_second]
 def LoadFile(filename, max_length, vec_size, pos_size, word_2_vec_model, relation_set):
+
     data_embedding = np.zeros((324704, max_length ,vec_size+pos_size))
     relation_label = []
     print("Process file:",filename)
@@ -63,7 +64,7 @@ def LoadFile(filename, max_length, vec_size, pos_size, word_2_vec_model, relatio
         data_embedding[count] = input_embedding
         count += 1
     print("The total count is : ",count)
-    return (data_embedding,relation_label)
+    return (data_embedding[0:len(relation_label)],relation_label)
 
 data = pickle.load(open("../unknow_data/relation_dict.pkl", 'rb'))
 wiki_relation_map = json.load(open("../WikipediaWikidataDistantSupervisionAnnotations.v1.0/en.json", 'r'))
@@ -72,7 +73,7 @@ is_training = False
 
 wiki_data_path = '../data/wiki_data/'
 files = os.listdir(wiki_data_path)
-file_name = 'validation'
+file_name = 'training'
 wiki_file = '../data/wiki_data/filterer-'+file_name+'.txt'
 wiki_files = ['../data/wiki_data/filterer-held-out.txt','../data/wiki_data/filterer-training.txt','../data/wiki_data/filterer-validation.txt']
 if is_training:
