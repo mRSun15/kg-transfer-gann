@@ -15,7 +15,7 @@ cuda = True
 lr = 1e-3
 batch_size = 128
 n_epoch = 100
-
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 manual_seed = random.randint(1, 10000)
 random.seed(manual_seed)
 torch.manual_seed(manual_seed)
