@@ -34,7 +34,7 @@ class GANModel(nn.Module):
         self.class_classifier.add_module('c_softmax', nn.LogSoftmax())
 
         self.domain_classifier = nn.Sequential()
-        self.domain_classifier.add_module('d_fc1', nn.Linear(50 * 4 * 4, 100))
+        self.domain_classifier.add_module('d_fc1', nn.Linear(50 * 5 * 5, 100))
         self.domain_classifier.add_module('d_bn1', nn.BatchNorm2d(100))
         self.domain_classifier.add_module('d_relu1', nn.ReLU(True))
         self.domain_classifier.add_module('d_fc2', nn.Linear(100, 2))
