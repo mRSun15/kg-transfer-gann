@@ -110,17 +110,17 @@ for epoch in range(n_epoch):
         if cuda:
             s_data = s_data.cuda()
             s_label = s_label.cuda()
-            input_img = input_data.cuda()
+            input_data = input_data.cuda()
             class_label = class_label.cuda()
             domain_label = domain_label.cuda()
 
         input_data.resize_as_(s_data).copy_(s_data)
         class_label.resize_as_(s_label).copy_(s_label)
-        inputv_img = Variable(input_data)
+        inputv_data = Variable(input_data)
         classv_label = Variable(class_label)
         domainv_label = Variable(domain_label)
 
-        class_output, domain_output = my_net(input_data=inputv_img, alpha=alpha)
+        class_output, domain_output = my_net(input_data=inputv_data, alpha=alpha)
         err_s_label = loss_class(class_output, classv_label)
         err_s_domain = loss_domain(domain_output, domainv_label)
 
@@ -130,20 +130,20 @@ for epoch in range(n_epoch):
 
         batch_size = len(t_data)
 
-        input_img = torch.FloatTensor(batch_size,max_length,input_dim)
+        input_data = torch.FloatTensor(batch_size,max_length,input_dim)
         domain_label = torch.ones(batch_size)
         domain_label = domain_label.long()
 
         if cuda:
             t_data = t_data.cuda()
-            input_img = input_img.cuda()
+            input_data = input_data.cuda()
             domain_label = domain_label.cuda()
 
-        input_img.resize_as_(t_data).copy_(t_data)
-        inputv_img = Variable(input_img)
+        input_data.resize_as_(t_data).copy_(t_data)
+        inputv_data = Variable(input_data)
         domainv_label = Variable(domain_label)
 
-        _, domain_output = my_net(input_data=inputv_img, alpha=alpha)
+        _, domain_output = my_net(input_data=inputv_data, alpha=alpha)
         err_t_domain = loss_domain(domain_output, domainv_label)
         err = err_t_domain + err_s_domain + err_s_label
         err.backward()
