@@ -43,7 +43,7 @@ class GANModel(nn.Module):
     def forward(self, input_data, alpha):
         input_data = input_data.view(input_data.data.shape[0],1,self.max_length, self.input_dim)
         feature = self.feature(input_data)
-        feature = feature.view(-1, 30 * 5 * 5)
+        feature = feature.view(-1, 30,5,5)
         reverse_feature = ReverseLayerF.apply(feature, alpha)
         class_output = self.class_classifier(feature)
         domain_output = self.domain_classifier(reverse_feature)
