@@ -67,6 +67,7 @@ def test(dataset_name,data, label, epoch):
         n_correct += pred.eq(classv_label.data.view_as(pred)).cpu().sum()
         print(pred.eq(classv_label.data.view_as(pred)).cpu())
         print(pred.eq(classv_label.data.view_as(pred)).cpu().shape)
+        print(pred.eq(classv_label.data.view_as(pred)).cpu().type)
         n_total += batch_size
 
         i += 1
