@@ -15,7 +15,7 @@ def test(dataset_name,data, label, epoch):
     alpha = 0
 
     """load data"""
-    dataset = torch.utils.data.TensorDataset(torch.Tensor(data), torch.Tensor(label))
+    dataset = torch.utils.data.TensorDataset(torch.Tensor(data), torch.LongTensor(label))
     dataloader = torch.utils.data.DataLoader(
         dataset=dataset,
         batch_size=batch_size,
