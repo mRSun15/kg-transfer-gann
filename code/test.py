@@ -66,9 +66,8 @@ def test(dataset_name,data, label, epoch):
         pred = class_output.data.max(1, keepdim=True)[1]
         n_correct += pred.eq(classv_label.data.view_as(pred)).cpu().sum()
         n_total += batch_size
-        print(n_correct, n_total)
         i += 1
 
-    accu = n_correct * 1.0 / n_total
+    accu = n_correct.double()/ n_total
 
     print('epoch: %d, accuracy of the %s dataset: %f' % (epoch, dataset_name, accu))
