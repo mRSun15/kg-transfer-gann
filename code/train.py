@@ -81,7 +81,7 @@ for p in my_net.parameters():
     p.requires_grad = True
 print("train")
 # training
-f = open('../output.txt', 'w')
+f = open('../test_output.txt', 'w')
 old = sys.stdout
 sys.stdout = f
 for epoch in range(n_epoch):
