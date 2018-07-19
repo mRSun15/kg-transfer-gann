@@ -14,4 +14,3 @@ class ReverseLayerF(Function):
 
         return output, None
 
-
