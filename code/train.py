@@ -126,7 +126,7 @@ for epoch in range(n_epoch):
 
         # training model using target data
         data_target = data_target_iter.next()
-        t_data, _ = data_target
+        t_data = data_target
 
         batch_size = len(t_data)
 
