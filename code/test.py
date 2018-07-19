@@ -65,11 +65,7 @@ def test(dataset_name,data, label, epoch):
         class_output, _ = my_net(input_data=inputv_img, alpha=alpha)
         pred = class_output.data.max(1, keepdim=True)[1]
         n_correct += pred.eq(classv_label.data.view_as(pred)).cpu().sum()
-        print(classv_label.data.view_as(pred))
-        print("--------------------------------------------------------")
-        print(class_output)
-        print("--------------------------------------------------------")
-        print(pred)
+        print(pred.eq(classv_label.data.view_as(pred)))
         n_total += batch_size
 
         i += 1
