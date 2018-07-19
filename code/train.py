@@ -49,7 +49,7 @@ dataloader_source = torch.utils.data.DataLoader(
     num_workers=8)
 
 dataloader_target = torch.utils.data.DataLoader(
-    dataset=target_train_data,
+    dataset=torch.FloatTensor(target_train_data),
     batch_size=batch_size,
     shuffle=True,
     num_workers=8)
