@@ -67,10 +67,10 @@ def test(dataset_name,data, label, epoch):
         pred = class_output.data.max(1, keepdim=True)[1]
         n_correct += pred.eq(classv_label.data.view_as(pred)).cpu().sum()
         n_total += batch_size
-        i += 1
-        print(batch_size)
-        print(pred.shape)
+        # print(batch_size)
+        # print(pred.shape)
         pred_label_np[i*128:i*128+batch_size] = pred.cpu().numpy().reshape(-1)
+        i += 1
 
     accu = n_correct.double()/ n_total
 
