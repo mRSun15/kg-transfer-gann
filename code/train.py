@@ -12,7 +12,7 @@ from model import GANModel
 model_root = os.path.join('..', 'models')
 cuda = True
 
-lr = 1e-3
+lr = 1e-4
 batch_size = 128
 n_epoch = 100
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
@@ -81,9 +81,9 @@ for p in my_net.parameters():
     p.requires_grad = True
 print("train")
 # training
-f = open('../test_output.txt', 'w')
-old = sys.stdout
-sys.stdout = f
+# f = open('../test_output.txt', 'w')
+# old = sys.stdout
+# sys.stdout = f
 for epoch in range(n_epoch):
 
     len_dataloader = min(len(dataloader_source), len(dataloader_target))
@@ -91,6 +91,9 @@ for epoch in range(n_epoch):
     data_target_iter = iter(dataloader_target)
 
     i = 0
+    epoch_err_s_label = 0
+    epoch_err_s_domain = 0
+    epoch_err_t_domain = 0
     while i < len_dataloader:
 
         p = float(i + epoch * len_dataloader) / n_epoch / len_dataloader
@@ -149,17 +152,18 @@ for epoch in range(n_epoch):
         err = err_t_domain + err_s_domain + err_s_label
         err.backward()
         optimizer.step()
-
+        epoch_err_s_label += err_s_label.cpu().data.numpy()
+        epoch_err_s_domain += err_s_domain.cpu().data.numpy()
+        epoch_err_t_domain += err_t_domain.cpu().data.numpy()
         i += 1
 
-        print('epoch: %d, [iter: %d / all %d], err_s_label: %f, err_s_domain: %f, err_t_domain: %f'%
-              (epoch, i, len_dataloader, err_s_label.cpu().data.numpy(),
-                 err_s_domain.cpu().data.numpy(), err_t_domain.cpu().data.numpy()))
+    print('epoch: %d,  err_s_label: %f, err_s_domain: %f, err_t_domain: %f'%
+              (epoch, epoch_err_s_label, epoch_err_s_domain, epoch_err_t_domain))
 
     torch.save(my_net, '{0}/DANN_model_epoch_{1}.pth'.format(model_root, epoch))
     test('source_data_wiki', source_test_data,source_test_label, epoch)
     test('test_data_nyt', target_test_data,target_test_label,epoch)
 
-sys.stdout = old
-f.close()
+# sys.stdout = old
+# f.close()
 print('done')

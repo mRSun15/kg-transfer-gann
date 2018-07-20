@@ -73,9 +73,9 @@ for p in my_net.parameters():
     p.requires_grad = True
 print("train")
 # training
-f = open('../test_output.txt', 'w')
-old = sys.stdout
-sys.stdout = f
+# f = open('../test_output.txt', 'w')
+# old = sys.stdout
+# sys.stdout = f
 for epoch in range(n_epoch):
 
     len_dataloader = len(dataloader_source)
@@ -126,6 +126,6 @@ for epoch in range(n_epoch):
     # torch.save(my_net, '{0}/DANN_model_epoch_{1}.pth'.format(model_root, epoch))
     test('source_data_wiki', source_test_data,source_test_label, epoch)
 
-sys.stdout = old
-f.close()
+# sys.stdout = old
+# f.close()
 print('done\n')
