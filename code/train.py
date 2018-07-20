@@ -156,7 +156,9 @@ for epoch in range(n_epoch):
         epoch_err_s_domain += err_s_domain.cpu().data.numpy()
         epoch_err_t_domain += err_t_domain.cpu().data.numpy()
         i += 1
-
+    epoch_err_t_domain = epoch_err_t_domain*1.0/len_dataloader
+    epoch_err_s_label = epoch_err_s_label*1.0/len_dataloader
+    epoch_err_s_domain = epoch_err_s_domain*1.0/len_dataloader
     print('epoch: %d,  err_s_label: %f, err_s_domain: %f, err_t_domain: %f'%
               (epoch, epoch_err_s_label, epoch_err_s_domain, epoch_err_t_domain))
 
