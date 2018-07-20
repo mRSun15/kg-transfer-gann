@@ -69,6 +69,7 @@ def test(dataset_name,data, label, epoch):
         n_total += batch_size
         i += 1
         print(batch_size)
+        print(pred.shape)
         pred_label_np[i*128:i*128+batch_size] = pred.cpu().numpy().reshape(-1)
 
     accu = n_correct.double()/ n_total
