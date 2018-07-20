@@ -41,7 +41,7 @@ def test(dataset_name,data, label, epoch):
     n_correct = 0
 
     test_data = torch.FloatTensor(data).view(-1,max_length,input_dim)
-    test_label = torch.LongTensor(label).view(-1)
+    test_label = label.reshape(-1)
     if cuda:
         test_data = test_data.cuda()
 
