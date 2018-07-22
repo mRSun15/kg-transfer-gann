@@ -22,7 +22,7 @@ torch.manual_seed(manual_seed)
 source_data_root = os.path.join('..', 'data')
 # target_data_root = source_data_root
 source_data_train = os.path.join(source_data_root, 'nyt_train_data_.npy')
-source_label_train = os.path.join(source_data_root, 'nyt_train_label.npy')
+source_label_train = os.path.join(source_data_root, 'nyt_train_label_.npy')
 source_data_test = os.path.join(source_data_root, 'nyt_test_data_.npy')
 source_label_test = os.path.join(source_data_root, 'nyt_test_label_.npy')
 # target_data_train = os.path.join(target_data_root, 'nyt_train_data.npy')
