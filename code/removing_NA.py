@@ -22,8 +22,8 @@ new_wiki_validation_data = wiki_validation_data[wiki_validation_label != relatio
 new_wiki_validation_label = wiki_validation_label[wiki_validation_label != relation_id]
 # new_nyt_train_data = nyt_train_data[nyt_train_label != relation_id]
 # new_nyt_train_label = nyt_train_label[nyt_train_label != relation_id]
-new_nyt_test_data = nyt_train_data[nyt_test_label != relation_id]
-new_nyt_test_label = nyt_train_label[nyt_test_label != relation_id]
+new_nyt_test_data = nyt_test_data[nyt_test_label != relation_id]
+new_nyt_test_label = nyt_test_label[nyt_test_label != relation_id]
 
 #save
 np.save('../data/wiki_train_data_.npy', new_wiki_training_data)
