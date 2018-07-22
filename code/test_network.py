@@ -82,6 +82,7 @@ for epoch in range(n_epoch):
     data_source_iter = iter(dataloader_source)
 
     i = 0
+    epoch_err_s_label = 0
     while i < len_dataloader:
 
         p = float(i + epoch * len_dataloader) / n_epoch / len_dataloader
@@ -114,14 +115,14 @@ for epoch in range(n_epoch):
 
         class_output, domain_output = my_net(input_data=inputv_data, alpha=alpha)
         err_s_label = loss_class(class_output, classv_label)
-
+        epoch_err_s_label += err_s_label.cpu().data.numpy()
         err = err_s_label
         err.backward()
         optimizer.step()
 
         i += 1
-
-        # print('epoch: %d, [iter: %d / all %d], err_s_label: %f'%(epoch, i, len_dataloader, err_s_label.cpu().data.numpy()))
+    epoch_err_s_label = epoch_err_s_label * 1.0 / len_dataloader
+    print('epoch: %d,  err_s_label: %f'%(epoch, epoch_err_s_label))
 
     # torch.save(my_net, '{0}/DANN_model_epoch_{1}.pth'.format(model_root, epoch))
     test('source_data_wiki', source_test_data,source_test_label, epoch)
