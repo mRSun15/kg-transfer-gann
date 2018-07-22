@@ -121,7 +121,7 @@ for epoch in range(n_epoch):
 
         i += 1
 
-        print('epoch: %d, [iter: %d / all %d], err_s_label: %f'%(epoch, i, len_dataloader, err_s_label.cpu().data.numpy()))
+        # print('epoch: %d, [iter: %d / all %d], err_s_label: %f'%(epoch, i, len_dataloader, err_s_label.cpu().data.numpy()))
 
     # torch.save(my_net, '{0}/DANN_model_epoch_{1}.pth'.format(model_root, epoch))
     test('source_data_wiki', source_test_data,source_test_label, epoch)
