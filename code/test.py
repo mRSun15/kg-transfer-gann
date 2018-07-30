@@ -5,7 +5,7 @@ from torch.autograd import Variable
 import sklearn.metrics
 import numpy as np
 
-def test(dataset_name,data, label, epoch):
+def test(dataset_name,data, mask,label, epoch):
 
     model_root = os.path.join('..', 'models')
     cuda = True
@@ -16,7 +16,7 @@ def test(dataset_name,data, label, epoch):
     alpha = 0
     label = label.reshape(-1)
     """load data"""
-    dataset = torch.utils.data.TensorDataset(torch.Tensor(data), torch.LongTensor(label))
+    dataset = torch.utils.data.TensorDataset(torch.Tensor(data),torch.Tensor(mask),torch.LongTensor(label))
     dataloader = torch.utils.data.DataLoader(
         dataset=dataset,
         batch_size=batch_size,
@@ -27,7 +27,7 @@ def test(dataset_name,data, label, epoch):
     """ training """
 
     my_net = torch.load(os.path.join(
-        model_root, 'DANN_model_epoch_' + str(epoch) + '.pth'
+        model_root, 'PCNN_model_epoch_' + str(epoch) + '.pth'
     ))
     my_net = my_net.eval()
 
@@ -45,25 +45,30 @@ def test(dataset_name,data, label, epoch):
 
         # test model using target data
         data_target = data_target_iter.next()
-        t_img, t_label = data_target
+        t_img,t_mask,t_label = data_target
 
         batch_size = len(t_label)
 
         input_img = torch.FloatTensor(batch_size, max_length, input_dim)
+        input_mask = torch.FloatTensor(batch_size,max_length, 3)
         class_label = torch.LongTensor(batch_size)
 
         if cuda:
             t_img = t_img.cuda()
             t_label = t_label.cuda()
+            t_mask = t_mask.cuda()
+            input_mask = input_mask.cuda()
             input_img = input_img.cuda()
             class_label = class_label.cuda()
 
         input_img.resize_as_(t_img).copy_(t_img)
+        input_mask.resize_as_(t_mask).copy_(t_mask)
         class_label.resize_as_(t_label).copy_(t_label)
         inputv_img = Variable(input_img)
+        inputv_mask = Variable(input_mask)
         classv_label = Variable(class_label)
 
-        class_output, _ = my_net(input_data=inputv_img, alpha=alpha)
+        class_output, _ = my_net(input_data=inputv_img, mask=inputv_mask)
         pred = class_output.data.max(1, keepdim=True)[1]
         n_correct += pred.eq(classv_label.data.view_as(pred)).cpu().sum()
         n_total += batch_size
