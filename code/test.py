@@ -68,7 +68,7 @@ def test(dataset_name,data, mask,label, epoch):
         inputv_mask = Variable(input_mask)
         classv_label = Variable(class_label)
 
-        class_output, _ = my_net(input_data=inputv_img, mask=inputv_mask)
+        class_output = my_net(input_data=inputv_img, mask=inputv_mask)
         pred = class_output.data.max(1, keepdim=True)[1]
         n_correct += pred.eq(classv_label.data.view_as(pred)).cpu().sum()
         n_total += batch_size
