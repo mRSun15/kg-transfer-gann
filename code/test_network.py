@@ -8,7 +8,7 @@ import numpy as np
 from test import test
 import sys
 from model import GANModel
-from code.model import PCNNGANmodel
+from model import PCNNGANmodel
 
 model_root = os.path.join('..', 'models')
 cuda = True
