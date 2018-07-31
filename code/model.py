@@ -1,6 +1,6 @@
 import torch.nn as nn
 import torch
-from code.functions import ReverseLayerF
+from functions import ReverseLayerF
 
 
 class PCNNGANmodel(nn.Module):
