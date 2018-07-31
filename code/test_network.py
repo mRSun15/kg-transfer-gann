@@ -14,7 +14,7 @@ from dataLoader import PCNNDataSet
 model_root = os.path.join('..', 'models')
 cuda = True
 
-lr = 1e-4
+lr = 0.0003
 batch_size = 128
 n_epoch = 100
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
