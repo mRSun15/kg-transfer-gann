@@ -63,7 +63,7 @@ print("Total relations class number: ",class_num)
 #                   embedding_dim=100,
 #                   class_num=class_num)
 my_net = PCNNGANmodel(max_length = max_length,
-                      input_dim=1,
+                      input_dim=input_dim,
                       embedding_dim=embedding_dim,
                       class_num = class_num)
 
