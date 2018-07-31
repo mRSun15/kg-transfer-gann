@@ -33,7 +33,7 @@ class PCNNGANmodel(nn.Module):
 
     def piece_pooling(self, x, mask):
         x = x.view(-1,self.max_length,self.hidden_size)
-        new_mask = x.view(-1,self.max_length, 1,3)*100
+        new_mask = mask.view(-1,self.max_length, 1,3)*100
         pooling_x,_ = torch.max(x+new_mask,1)-100
         return pooling_x.view(-1,self.hidden_size*3)
 
