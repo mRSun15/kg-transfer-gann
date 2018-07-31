@@ -13,7 +13,7 @@ class PCNNGANmodel(nn.Module):
         self.feature = nn.Sequential()
         self.feature.add_module('f_conv', nn.Conv2d(input_dim, embedding_dim, kernel_size=(1,kernel_size),
                                                     stride = (1,stride_size),padding=(0,1)))
-        self.feature.add_module(('f_bn', nn.BatchNorm2d(embedding_dim)))
+        self.feature.add_module('f_bn', nn.BatchNorm2d(embedding_dim))
         self.feature_ = nn.Sequential()
         self.feature_.add_module('f_relu', nn.ReLU(True))
         self.feature_.add_module('f_drop', nn.Dropout())
