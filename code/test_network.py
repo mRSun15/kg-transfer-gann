@@ -49,7 +49,7 @@ dataloader_source = torch.utils.data.DataLoader(
     dataset=source_dataset,
     batch_size=batch_size,
     shuffle=True,
-    num_workers=8)
+    num_workers=1)
 
 # load model
 print("load model")
