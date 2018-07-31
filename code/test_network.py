@@ -9,6 +9,7 @@ from test import test
 import sys
 from model import GANModel
 from model import PCNNGANmodel
+from dataLoader import PCNNDataSet
 
 model_root = os.path.join('..', 'models')
 cuda = True
@@ -42,7 +43,7 @@ source_train_mask = np.load(source_mask_train)
 source_test_data = np.load(source_data_test)
 source_test_label = np.load(source_label_test)
 source_test_mask = np.load(source_mask_test)
-source_dataset = torch.utils.data.TensorDataset(torch.Tensor(source_train_data),torch.Tensor(source_mask_train),torch.LongTensor(source_train_label))
+source_dataset = PCNNDataSet(source_train_data, source_mask_train,source_train_label)
 
 dataloader_source = torch.utils.data.DataLoader(
     dataset=source_dataset,
