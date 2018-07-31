@@ -43,7 +43,7 @@ source_train_mask = np.load(source_mask_train)
 source_test_data = np.load(source_data_test)
 source_test_label = np.load(source_label_test)
 source_test_mask = np.load(source_mask_test)
-source_dataset = PCNNDataSet(source_train_data, source_mask_train,source_train_label)
+source_dataset = PCNNDataSet(source_train_data, source_train_mask,source_train_label)
 
 dataloader_source = torch.utils.data.DataLoader(
     dataset=source_dataset,
