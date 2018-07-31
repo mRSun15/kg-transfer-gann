@@ -128,7 +128,7 @@ for epoch in range(n_epoch):
         classv_label = Variable(class_label)
         domainv_label = Variable(domain_label)
 
-        class_output, domain_output = my_net(input_data=inputv_data, mask=input_mask)
+        class_output = my_net(input_data=inputv_data, mask=input_mask)
         err_s_label = loss_class(class_output, classv_label)
         epoch_err_s_label += err_s_label.cpu().data.numpy()
         err = err_s_label
