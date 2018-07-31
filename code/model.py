@@ -11,8 +11,8 @@ class PCNNGANmodel(nn.Module):
         self.class_num = class_num
         self.hidden_size = embedding_dim
         self.feature = nn.Sequential()
-        self.feature.add_module('f_conv', nn.Conv2d(1, embedding_dim, kernel_size=(1,kernel_size),
-                                                    stride = (1,stride_size),padding=(0,1)))
+        self.feature.add_module('f_conv', nn.Conv2d(1, embedding_dim, kernel_size=(kernel_size, input_dim),
+                                                    stride = (1,stride_size),padding=(1,0)))
         self.feature.add_module('f_bn', nn.BatchNorm2d(embedding_dim))
         self.feature_ = nn.Sequential()
         self.feature_.add_module('f_relu', nn.ReLU(True))
