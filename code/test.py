@@ -16,7 +16,11 @@ def test(dataset_name,data, mask,label, epoch):
     alpha = 0
     label = label.reshape(-1)
     """load data"""
-    dataset = torch.utils.data.TensorDataset(torch.Tensor(data),torch.Tensor(mask),torch.LongTensor(label))
+
+    # dataset = torch.utils.data.TensorDataset(torch.Tensor(data),torch.Tensor(mask),torch.LongTensor(label))
+    dataset = torch.utils.data.TensorDataset(torch.Tensor(data),
+                                                    torch.LongTensor(label))
+
     dataloader = torch.utils.data.DataLoader(
         dataset=dataset,
         batch_size=batch_size,
@@ -27,7 +31,7 @@ def test(dataset_name,data, mask,label, epoch):
     """ training """
 
     my_net = torch.load(os.path.join(
-        model_root, 'PCNN_model_epoch_' + str(epoch) + '.pth'
+        model_root, 'DANN_model_epoch_' + str(epoch) + '.pth'
     ))
     my_net = my_net.eval()
 

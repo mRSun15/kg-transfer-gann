@@ -135,7 +135,7 @@ for epoch in range(n_epoch):
     epoch_err_s_label = epoch_err_s_label * 1.0 / len_dataloader
     print('epoch: %d,  err_s_label: %f'%(epoch, epoch_err_s_label))
 
-    torch.save(my_net, '{0}/PCNN_model_epoch_{1}.pth'.format(model_root, epoch))
+    torch.save(my_net, '{0}/DANN_model_epoch_{1}.pth'.format(model_root, epoch))
     test('source_data_nyt', source_test_data,source_test_mask,source_test_label, epoch)
 
 # sys.stdout = old
